@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "@/": "./src/",
+    "@/config/": "./src/config/",
+    "@/controllers/": "./src/controllers/",
+    "@/db/": "./src/db/",
+    "@/middleware/": "./src/middleware/",
+    "@/routes/": "./src/routes/",
+    "@/services/": "./src/services/",
+    "@/types/": "./src/types/",
+    "@/utils/": "./src/utils/"
+  }
+}
