@@ -43,6 +43,25 @@ cp .env.example .env
 # Edit the .env file with your database and Redis credentials
 ```
 
+## Project Structure
+
+```
+/
+├── src/                    # Source code
+│   ├── config/             # Configuration files
+│   ├── controllers/        # Request handlers
+│   ├── db/                 # Database setup and models
+│   ├── middleware/         # Custom middleware
+│   ├── routes/             # API routes
+│   ├── services/           # Business logic
+│   ├── types/              # TypeScript type definitions
+│   └── utils/              # Utility functions
+├── deps.ts                 # External dependencies
+├── mod.ts                  # Main entry point
+├── deno.json               # Deno configuration
+└── .env.example            # Example environment variables
+```
+
 ## Database Setup
 
 Initialize the PostgreSQL database with schema and sample data:
