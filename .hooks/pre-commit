@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/hook.sh"
+
+echo "Checking commit message format..."
+echo "Tip: To skip this hook, use: git commit --no-verify -m \"commit message\""
+
+# Get commit message
+commit_msg=$(cat "$1")
+
+# Define valid commit message prefixes
+valid_prefixes="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
+
+# Check if commit message follows conventional commits format
+if ! echo "$commit_msg" | grep -qE "^($valid_prefixes)(\([a-z]+\))?: .+"; then
+  echo "Error: Invalid commit message format"
+  echo "Correct format: <type>[(scope)]: <description>"
+  echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+  echo "Example: feat(auth): add login functionality"
+  echo "Or use --no-verify to bypass this check: git commit --amend --no-verify"
+  exit 1
+fi
+
+# All checks passed
+echo "Commit message format valid ✓"
+exit 0
