@@ -1,3 +1,8 @@
+/**
+ * utils/error.util.ts
+ * @fileoverview Error classes for the application.
+ */
+
 import { Status } from "../../deps.ts";
 
 export class AppError extends Error {

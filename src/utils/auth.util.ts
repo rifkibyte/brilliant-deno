@@ -1,3 +1,8 @@
+/**
+ * utils/auth.util.ts
+ * Utility functions for authentication and security.
+ */
+
 import { createJwt, getNumericDate, crypto, encodeHex } from "../../deps.ts";
 import { config } from "../config/config.ts";
 import { JwtUserPayload, UserRole } from "../types/user.types.ts";

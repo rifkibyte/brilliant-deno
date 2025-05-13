@@ -1,3 +1,8 @@
+/**
+ * utils/response.util.ts
+ * @fileoverview This file contains functions for sending responses to the client.
+ */
+
 import { Context, Status } from "../../deps.ts";
 
 interface SuccessResponse<T> {
