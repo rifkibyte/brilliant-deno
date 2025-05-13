@@ -1,14 +1,13 @@
-import { log, dotenvConfig } from "./deps.ts";
+import { dotenvConfig, log } from "./deps.ts";
 import { app } from "./src/app.ts";
 import { config } from "./src/config/config.ts";
-
 // Load environment variables
-await dotenvConfig({ export: true, path: "./.env" });
+await dotenvConfig({ export: true, path: "./.env", allowEmptyValues: true });
 
 // Configure logging
-log.setup({
+await log.setup({
   handlers: {
-    console: new log.handlers.ConsoleHandler("DEBUG"),
+    console: new log.ConsoleHandler("DEBUG"),
   },
   loggers: {
     default: {

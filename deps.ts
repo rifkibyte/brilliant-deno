@@ -1,8 +1,9 @@
 // Standard library dependencies
 export * as path from "https://deno.land/std@0.221.0/path/mod.ts";
 export * as log from "https://deno.land/std@0.221.0/log/mod.ts";
+export { ConsoleHandler } from "https://deno.land/std@0.221.0/log/console_handler.ts";
 export { serve } from "https://deno.land/std@0.221.0/http/server.ts";
-export { config as dotenvConfig } from "https://deno.land/std@0.221.0/dotenv/mod.ts";
+export { load as dotenvConfig } from "https://deno.land/std@0.221.0/dotenv/mod.ts";
 
 // Third-party dependencies
 export { Application, Router, Context, Status } from "https://deno.land/x/oak@v12.6.1/mod.ts";
