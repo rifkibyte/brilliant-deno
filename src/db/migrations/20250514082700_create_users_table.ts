@@ -19,6 +19,7 @@ export async function up() {
       is_active BOOLEAN NOT NULL DEFAULT true,
       is_email_verified BOOLEAN NOT NULL DEFAULT false,
       verification_token VARCHAR(255),
+      verification_expires TIMESTAMP,
       password_reset_token VARCHAR(255),
       password_reset_expires TIMESTAMP
     );
@@ -32,7 +33,7 @@ export async function up() {
     -- Create index on role for role-based queries
     CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
   `;
-  
+
   await query(sql);
 }
 
@@ -41,6 +42,6 @@ export async function down() {
   const sql = `
     DROP TABLE IF EXISTS users;
   `;
-  
+
   await query(sql);
 }
