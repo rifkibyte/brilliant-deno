@@ -1,5 +1,5 @@
 import { Router } from "../../deps.ts";
-import { register, login, logout, refreshToken, forgotPassword, resetPassword, googleAuth, googleCallback } from "../controllers/auth.controller.ts";
+import { register, login, logout, refreshToken, forgotPassword, resetPassword, googleAuth, verifyEmail, resendVerificationEmail } from "../controllers/auth/auth.controller.ts";
 import { authMiddleware } from "../middleware/auth.middleware.ts";
 import { rateLimitMiddleware } from "../middleware/rate-limit.middleware.ts";
 
@@ -17,8 +17,10 @@ router.post("/register", authRateLimit, register);
 router.post("/login", authRateLimit, login);
 router.post("/forgot-password", authRateLimit, forgotPassword);
 router.post("/reset-password", authRateLimit, resetPassword);
+router.post("/verify-email", authRateLimit, verifyEmail);
+router.post("/resend-verification", authRateLimit, resendVerificationEmail);
 router.get("/google", googleAuth);
-router.get("/google/callback", googleCallback);
+// router.get("/google/callback", googleCallback);
 
 // Protected routes (require authentication)
 router.use(authMiddleware);

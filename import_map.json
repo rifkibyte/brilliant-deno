@@ -1,5 +1,6 @@
 {
   "imports": {
+    "~/": "./",
     "@/": "./src/",
     "@/config/": "./src/config/",
     "@/controllers/": "./src/controllers/",

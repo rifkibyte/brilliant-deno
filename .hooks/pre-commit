@@ -1,6 +1,15 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/hook.sh"
 
+# Check git user name
+current_user=$(git config user.name)
+allowed_user="rifkiandriyanto"
+
+if [ "$current_user" = "$allowed_user" ]; then
+  echo "Bypass commit message check for user: $current_user"
+  exit 0
+fi
+
 echo "Checking commit message format..."
 echo "Tip: To skip this hook, use: git commit --no-verify -m \"commit message\""
 
