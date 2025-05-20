@@ -10,3 +10,4 @@ export { refreshToken } from "./refresh-token.ts";
 export { forgotPassword } from "./forgot-password.ts";
 export { resetPassword } from "./reset-password.ts";
 export { googleAuth } from "./google-auth.ts";
+export { googleCallback } from "./google-callback.ts";

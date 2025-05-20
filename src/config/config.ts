@@ -6,6 +6,7 @@ export const config = {
   HOST: Deno.env.get("HOST") || "localhost",
   ENV: Deno.env.get("ENV") || "development",
   CORS_ORIGIN: Deno.env.get("CORS_ORIGIN") || "*",
+  FRONTEND_URL: Deno.env.get("FRONTEND_URL") || "http://localhost:3000",
 
   // Database configuration
   DB: {
@@ -34,7 +35,8 @@ export const config = {
   GOOGLE_OAUTH: {
     CLIENT_ID: Deno.env.get("GOOGLE_CLIENT_ID") || "",
     CLIENT_SECRET: Deno.env.get("GOOGLE_CLIENT_SECRET") || "",
-    REDIRECT_URI: Deno.env.get("GOOGLE_REDIRECT_URI") || "http://localhost:8000/api/auth/google/callback",
+    REDIRECT_URI: Deno.env.get("GOOGLE_REDIRECT_URI") ||
+      "http://localhost:8000/api/auth/google/callback",
   },
 
   // Email configuration

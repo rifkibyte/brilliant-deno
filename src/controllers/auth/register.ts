@@ -7,7 +7,7 @@ import { UserRole } from "@/types/user.types.ts";
 import { query } from "@/db/database.ts";
 import { AppError, ConflictError } from "@/utils/error.util.ts";
 import { config } from "@/config/config.ts";
-import { sendEmail } from "@/utils/email.util.ts";
+// import { sendEmail } from "@/utils/email.util.ts";
 
 // Schema for user registration
 const registerSchema = z.object({
@@ -38,14 +38,14 @@ export async function register(ctx: Context): Promise<void> {
     // Hash the password
     const hashedPassword = await hashPassword(data.password);
 
-    // Generate verification token
+    // Generate a random verification token for email verification
     const verificationToken = generateRandomToken();
 
     // Set verification token expiration (24 hours from now)
     const verificationExpires = new Date();
     verificationExpires.setHours(verificationExpires.getHours() + 24);
 
-    // Insert the new user
+    // Insert the new user into the database
     const result = await query(
       `INSERT INTO users 
        (email, password, first_name, last_name, role, verification_token, verification_expires, is_active, is_email_verified) 
@@ -67,24 +67,26 @@ export async function register(ctx: Context): Promise<void> {
     const user = result.rows[0];
 
     // Send verification email
-    const verificationUrl = `${config.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+    // const verificationUrl = `${config.FRONTEND_URL}/verify-email?token=${verificationToken}`;
 
-    await sendEmail({
-      to: data.email,
-      subject: "Verify your email address",
-      html: `
-        <h1>Email Verification</h1>
-        <p>Hello ${data.firstName},</p>
-        <p>Thank you for registering! Please verify your email address by clicking the link below:</p>
-        <p><a href="${verificationUrl}">Verify Email</a></p>
-        <p>This link will expire in 24 hours.</p>
-        <p>If you did not create an account, please ignore this email.</p>
-      `,
-    });
+    // await sendEmail({
+    //   to: data.email,
+    //   subject: "Verify your email address",
+    //   html: `
+    //     <h1>Email Verification</h1>
+    //     <p>Hello ${data.firstName},</p>
+    //     <p>Thank you for registering! Please verify your email address by clicking the link below:</p>
+    //     <p><a href="${verificationUrl}">Verify Email</a></p>
+    //     <p>This link will expire in 24 hours.</p>
+    //     <p>If you did not create an account, please ignore this email.</p>
+    //   `,
+    // });
 
-    // Generate JWT token (but note that they still need to verify email to fully use the account)
+    // Generate JWT token for authentication
     const token = await generateJwtToken(user.id, user.email, user.role);
 
+    // Include the verificationToken in the response for development/testing purposes only.
+    // WARNING: Do NOT include this in production for security reasons.
     sendCreated(ctx, {
       user: {
         id: user.id,
@@ -97,6 +99,7 @@ export async function register(ctx: Context): Promise<void> {
       },
       token,
       expiresIn: config.JWT.EXPIRATION,
+      verificationToken, // <-- For development/testing only!
       message:
         "Please check your email to verify your account. You cannot fully use your account until you verify your email.",
     }, "User registered successfully. Please verify your email.");

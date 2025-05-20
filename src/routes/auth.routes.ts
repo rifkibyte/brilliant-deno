@@ -1,5 +1,15 @@
 import { Router } from "../../deps.ts";
-import { register, login, logout, refreshToken, forgotPassword, resetPassword, googleAuth, verifyEmail, resendVerificationEmail } from "../controllers/auth/auth.controller.ts";
+import {
+  forgotPassword,
+  googleAuth,
+  login,
+  logout,
+  refreshToken,
+  register,
+  resendVerificationEmail,
+  resetPassword,
+  verifyEmail,
+} from "../controllers/auth/auth.controller.ts";
 import { authMiddleware } from "../middleware/auth.middleware.ts";
 import { rateLimitMiddleware } from "../middleware/rate-limit.middleware.ts";
 
@@ -9,7 +19,7 @@ const router = new Router();
 const authRateLimit = rateLimitMiddleware({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // 10 requests per window
-  message: "Too many authentication attempts, please try again later."
+  message: "Too many authentication attempts, please try again later.",
 });
 
 // Public routes
