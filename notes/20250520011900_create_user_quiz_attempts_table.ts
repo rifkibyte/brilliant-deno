@@ -1,5 +1,5 @@
 // Migration: Create User Quiz Attempts Table
-import { query } from "../database.ts";
+import { query } from "@/db/database.ts";
 
 export async function up() {
   // Create user_quiz_attempts table

@@ -1,5 +1,5 @@
 // Migration: Create Course Enrollments Table
-import { query } from "../database.ts";
+import { query } from "@/db/database.ts";
 
 export async function up() {
   // Create course_enrollments table

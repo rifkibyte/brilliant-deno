@@ -1,5 +1,5 @@
 // Migration: Create Lesson Progress Table
-import { query } from "../database.ts";
+import { query } from "@/db/database.ts";
 
 export async function up() {
   // Create lesson_progress table
