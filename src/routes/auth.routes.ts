@@ -2,6 +2,7 @@ import { Router } from "../../deps.ts";
 import {
   forgotPassword,
   googleAuth,
+  googleCallback,
   login,
   logout,
   refreshToken,
@@ -30,7 +31,7 @@ router.post("/reset-password", authRateLimit, resetPassword);
 router.post("/verify-email", authRateLimit, verifyEmail);
 router.post("/resend-verification", authRateLimit, resendVerificationEmail);
 router.get("/google", googleAuth);
-// router.get("/google/callback", googleCallback);
+router.get("/google/callback", googleCallback);
 
 // Protected routes (require authentication)
 router.use(authMiddleware);
